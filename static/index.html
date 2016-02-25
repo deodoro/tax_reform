@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tax Reform</title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900,700italic,900italic,500italic,400italic,300italic,100,100italic' rel='stylesheet' type='text/css'>
+	<style type="text/css">
+		html {
+			font-family: Roboto;			
+		}
+		body {
+			margin: 1.5em;
+		}
+		h1,h2,h3 {
+			margin-bottom: .5em
+		}
+		button {
+			padding-right: 1em;
+			padding-left: 1em;
+			font-weight: 100;
+			font-size: 2em;
+			background-color: #f0f0f0;
+			border: 1px solid #000000;
+			border-radius: 0.1em;
+		}
+		table {
+			width: 80%;
+		}
+		td {
+			padding-left: 2em;
+		}
+		td:first-child {
+			padding: 0;
+			text-align: right;
+			width: 50%;
+		}
+		#panel1, #panel2, #panel3, #panel4 {
+			display: none;
+		}
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			var data = [{"params": {"tauc": 0.07, "H": 25.0, "g": 0.05, "GtoY": 0.05, "tauk": 0.29, "tauh": 0.31, "XtoY": 0.2, "KtoY": 2.9, "rKtoY": 0.333}, "results": {"total_revenue": 0.127, "real_i_rate": 0.033, "used_for_transfers": 0.105, "welfare": -51.922, "wage": 1.135, "tauc": 0.07, "consumption": 0.319, "real_return_to_k": 0.115, "labor": 0.0, "used_for_g_expenditure": 0.021, "capital": 1.234, "output": 0.425}}, {"params": {"tauc": 0.07, "benchmark_result": 0.105, "H": 25.0, "g": 0.042, "GtoY": 0.05, "tauk": 0.076, "tauh": 0.31, "XtoY": 0.2, "KtoY": 2.9, "rKtoY": 0.333}, "results": {"total_revenue": 0.143, "real_i_rate": 0.042, "used_for_transfers": 0.126, "welfare": -41.104, "wage": 1.135, "tauc": 0.201, "consumption": 0.293, "real_return_to_k": 0.115, "labor": 0.0, "used_for_g_expenditure": 0.016, "capital": 1.121, "output": 0.386}}, {"params": {"tauc": 0.07, "benchmark_result": 0.105, "H": 25.0, "g": 0.04, "GtoY": 0.05, "tauk": 0.051, "tauh": 0.31, "XtoY": 0.2, "KtoY": 2.9, "rKtoY": 0.333}, "results": {"total_revenue": 0.141, "real_i_rate": 0.044, "used_for_transfers": 0.125, "welfare": -40.015, "wage": 1.135, "tauc": 0.199, "consumption": 0.293, "real_return_to_k": 0.115, "labor": 0.0, "used_for_g_expenditure": 0.015, "capital": 1.12, "output": 0.386}}, {"params": {"tauc": 0.07, "benchmark_result": 0.105, "H": 25.0, "g": 0.048, "GtoY": 0.05, "tauk": 0.03, "tauh": 0.31, "XtoY": 0.2, "KtoY": 2.9, "rKtoY": 0.333}, "results": {"total_revenue": 0.148, "real_i_rate": 0.044, "used_for_transfers": 0.13, "welfare": -39.637, "wage": 1.135, "tauc": 0.24, "consumption": 0.285, "real_return_to_k": 0.115, "labor": 0.0, "used_for_g_expenditure": 0.018, "capital": 1.1, "output": 0.379}}, {"params": {"tauc": 0.07, "benchmark_result": 0.105, "H": 25.0, "g": 0.05, "GtoY": 0.05, "tauk": 0.091, "tauh": 0.31, "XtoY": 0.2, "KtoY": 2.9, "rKtoY": 0.333}, "results": {"total_revenue": 0.15, "real_i_rate": 0.042, "used_for_transfers": 0.131, "welfare": -42.156, "wage": 1.135, "tauc": 0.231, "consumption": 0.287, "real_return_to_k": 0.115, "labor": 0.0, "used_for_g_expenditure": 0.019, "capital": 1.109, "output": 0.382}}, {"params": {"tauc": 0.07, "benchmark_result": 0.105, "H": 25.0, "g": 0.062, "GtoY": 0.05, "tauk": 0.076, "tauh": 0.31, "XtoY": 0.2, "KtoY": 2.9, "rKtoY": 0.333}, "results": {"total_revenue": 0.161, "real_i_rate": 0.042, "used_for_transfers": 0.138, "welfare": -42.2, "wage": 1.135, "tauc": 0.291, "consumption": 0.275, "real_return_to_k": 0.115, "labor": 0.0, "used_for_g_expenditure": 0.023, "capital": 1.082, "output": 0.373}}, {"params": {"tauc": 0.07, "benchmark_result": 0.105, "H": 25.0, "g": 0.098, "GtoY": 0.05, "tauk": 0.091, "tauh": 0.31, "XtoY": 0.2, "KtoY": 2.9, "rKtoY": 0.333}, "results": {"total_revenue": 0.194, "real_i_rate": 0.042, "used_for_transfers": 0.16, "welfare": -45.078, "wage": 1.135, "tauc": 0.485, "consumption": 0.244, "real_return_to_k": 0.115, "labor": 0.0, "used_for_g_expenditure": 0.034, "capital": 1.007, "output": 0.347}}, {"params": {"tauc": 0.07, "benchmark_result": 0.105, "H": 25.0, "g": 0.031, "GtoY": 0.05, "tauk": 0.09, "tauh": 0.31, "XtoY": 0.2, "KtoY": 2.9, "rKtoY": 0.333}, "results": {"total_revenue": 0.133, "real_i_rate": 0.042, "used_for_transfers": 0.12, "welfare": -41.104, "wage": 1.135, "tauc": 0.153, "consumption": 0.303, "real_return_to_k": 0.115, "labor": 0.0, "used_for_g_expenditure": 0.012, "capital": 1.144, "output": 0.394}}, {"params": {"tauc": 0.07, "benchmark_result": 0.105, "H": 25.0, "g": 0.068, "GtoY": 0.05, "tauk": 0.09, "tauh": 0.31, "XtoY": 0.2, "KtoY": 2.9, "rKtoY": 0.333}, "results": {"total_revenue": 0.166, "real_i_rate": 0.042, "used_for_transfers": 0.141, "welfare": -43.139, "wage": 1.135, "tauc": 0.316, "consumption": 0.271, "real_return_to_k": 0.115, "labor": 0.0, "used_for_g_expenditure": 0.025, "capital": 1.073, "output": 0.37}}, {"params": {"tauc": 0.07, "benchmark_result": 0.105, "H": 25.0, "g": 0.043, "GtoY": 0.05, "tauk": 0.01, "tauh": 0.31, "XtoY": 0.2, "KtoY": 2.9, "rKtoY": 0.333}, "results": {"total_revenue": 0.144, "real_i_rate": 0.045, "used_for_transfers": 0.127, "welfare": -38.659, "wage": 1.135, "tauc": 0.223, "consumption": 0.289, "real_return_to_k": 0.115, "labor": 0.0, "used_for_g_expenditure": 0.016, "capital": 1.106, "output": 0.381}}, {"params": {"tauc": 0.07, "benchmark_result": 0.105, "H": 25.0, "g": 0.097, "GtoY": 0.05, "tauk": 0.091, "tauh": 0.31, "XtoY": 0.2, "KtoY": 2.9, "rKtoY": 0.333}, "results": {"total_revenue": 0.193, "real_i_rate": 0.042, "used_for_transfers": 0.16, "welfare": -45.01, "wage": 1.135, "tauc": 0.479, "consumption": 0.245, "real_return_to_k": 0.115, "labor": 0.0, "used_for_g_expenditure": 0.034, "capital": 1.01, "output": 0.348}}];
+			var benchmark = { total_revenue: 0 };
+			var makeParams = function(taxes) {
+				var result = {"tauc":  eval($("#tau_c").val()), "H": eval($("#h").val()), "g":  eval($("#g_y").val()), "GtoY":  eval($("#g_y").val()), "tauk": eval($("#tau_k").val()), "tauh":  eval($("#tau_h").val()), "XtoY":  eval($("#x_y").val()), "KtoY": eval($("#k_y").val()), "rKtoY": eval($("#rk_y").val()), "benchmark_result" : benchmark.total_revenue };
+				if (taxes !== undefined)
+					$.each(taxes, function(t) { result[t] = $(t).val(); });
+				return result;
+			};
+			$("#next_0").click(function() {
+				$.ajax({
+				  type: "POST",
+				  url: '/calibrate',
+	 			  contentType:"application/json; charset=utf-8",
+				  data: JSON.stringify(makeParams()),
+				  dataType: 'json',
+				  success: function(d) {
+				  			$("#panel0").hide()
+				  			$("#panel1").show()
+				  			$("span#A").text(d.A);
+				  			$("span#alpha").text(d.alpha);
+				  			$("span#beta").text(d.beta);
+				  			$("span#theta").text(d.theta);
+				  			$("span#delta").text(d.delta);
+					   }
+ 		        });
+			// <tr><td>Consumption</td><td><span id='consumption'></span></td></tr>
+			// <tr><td>Labor (h)</td><td><span id='labor'></span></td></tr>
+			// <tr><td>Capital (k)</td><td><span id='capital'></span></td></tr>
+			// <tr><td>Output (y)</td><td><span id='output'></span></td></tr>
+			// <tr><td>Wage (w)</td><td><span id='wage'></span></td></tr>
+			// <tr><td>Real Return to Capital (r)</td><td><span id='real_return_to_k'></span></td></tr>
+			// <tr><td>Real Interest Rate (i)</td><td><span id='real_i_rate'></span></td></tr>
+			// <tr><td>Total tax revenue is</td><td><span id='total_revenue'></span></td></tr>
+			// <tr><td>Used for government expenditure</td><td><span id='used_for_g_expenditure'></span></td></tr>
+			// <tr><td>Transfers</td><td><span id='transfer'></span></td></tr>
+			// <tr><td>Welfare</td><td><span id='welfare'></span></td></tr>
+			})
+			$("#next_1").click(function() {
+				$.ajax({
+				  type: "POST",
+				  url: '/bench',
+	 			  contentType:"application/json; charset=utf-8",
+				  data: JSON.stringify(makeParams()),
+				  dataType: 'json',
+				  success: function(d) {
+				  			benchmark = d;
+				  			$("#panel1").hide()
+				  			$("#panel2").show()
+				  			$("span#consumption").text(d.consumption);
+				  			$("span#labor").text(d.labor);
+				  			$("span#capital").text(d.capital);
+				  			$("span#output").text(d.output);
+				  			$("span#wage").text(d.wage);
+				  			$("span#real_return_to_k").text(d.real_return_to_k);
+				  			$("span#real_i_rate").text(d.real_i_rate);
+				  			$("span#wage").text(d.wage);
+				  			$("span#total_revenue").text(d.total_revenue);
+				  			$("span#used_for_g_expenditure").text(d.used_for_g_expenditure);
+				  			$("span#used_for_transfers").text(d.used_for_transfers);
+				  			$("span#welfare").text(d.welfare);
+					   }
+ 		        });
+			})
+			$("#back_1").click(function() {
+	  			$("#panel1").hide();
+	  			$("#panel0").show();
+			});
+			$("#next_2").click(function() {
+	  			$("#panel2").hide();
+	  			$("#panel3").show();
+			})
+			$("#back_2").click(function() {
+	  			$("#panel2").hide();
+	  			$("#panel1").show();
+			});
+			$("#next_3").click(function() {
+				$.ajax({
+				  type: "POST",
+				  url: '/run',
+	 			  contentType:"application/json; charset=utf-8",
+				  data: JSON.stringify(makeParams({'tau_h_1': 'tau_h', 'tau_k_1': 'tau_k'})),
+				  dataType: 'json',
+				  success: function(d) {
+				  			$("#panel3").hide()
+				  			$("#panel4").show()
+				  			$("span#consumption").text(d.consumption);
+				  			$("span#labor").text(d.labor);
+				  			$("span#capital").text(d.capital);
+				  			$("span#output").text(d.output);
+				  			$("span#wage").text(d.wage);
+				  			$("span#real_return_to_k").text(d.real_return_to_k);
+				  			$("span#real_i_rate").text(d.real_i_rate);
+				  			$("span#wage").text(d.wage);
+				  			$("span#total_revenue").text(d.total_revenue);
+				  			$("span#used_for_g_expenditure").text(d.used_for_g_expenditure);
+				  			$("span#used_for_transfers").text(d.used_for_transfers);
+				  			$("span#welfare").text(d.welfare);
+					   }
+ 		        });
+			})
+			$("#back_3").click(function() {
+	  			$("#panel3").hide()
+	  			$("#panel2").show()
+			});
+		})
+	</script>
+</head>
+<body>
+	<H1>TAX REFORM<br/>(NEOCLASSICAL GROWTH MODEL WITH FISCAL POLICY)</H1>
+	<div id='panel0'>
+		<div>We want to study the effects of changing the US taxation policy (great reliance on labor and capital taxes, and small use of consumption taxes) in a system that taxes mostly consumption. In order to do that we use a Neoclassical Growth Model with a government sector. We need first to calibrate our model to the US economy and find steady state values of tax revenues and welfare. Then, we will implement a revenue-neutral tax reform and see how it affects welfare and aggregate variables in the steady state.raw_input("Press Enter to start.")</div>
+		<h2>CALIBRATION</h2>
+		<h3>Input the relevant aggregate ratios that are obtained by reorganizing the NIPA. Use decimal notation (not fractions).</h3>
+		<table>
+			<tr><td>Investment to output ratio (X/Y)</td><td><input type='text' id='x_y' value='0.2'></td></tr>
+			<tr><td>Government expenditure to output ratio (G/Y)</td><td><input type='text' id='g_y' value='0.05'></td></tr>
+			<tr><td>Capital to output ratio (K/Y)</td><td><input type='text' id='k_y' value='2.9'></td></tr>
+			<tr><td>Capital income share (rK/Y)</td><td><input type='text' id='rk_y' value='0.333'></td></tr>
+			<tr><td>Average hours worked per week (h*100)</td><td><input type='text' id='h' value='25.0'></td></tr>
+			<tr><td colspan="2"><h3>Now insert the tax rates calibrated to the US accounts</h3></td></tr>
+			<tr><td>Tax on labor (tau_h)</td><td><input type='text' id='tau_h' value='0.31'></td></tr>
+			<tr><td>Tax on capital (tau_k)</td><td><input type='text' id='tau_k' value='0.29'></td></tr>
+			<tr><td>Tax on consumption (tau_c)</td><td><input type='text' id='tau_c' value='0.07'></td></tr>
+		</table>
+		<div style='margin-top: 2em'><button style='float: right' id='next_0'>Next &gt;</button></div>
+	</div>
+	<div id='panel1'>
+		<h2>CALIBRATED PARAMETERS</h2>
+		<h3>The following parameters are picked in order to make the model equilibirium consistent with the real data information from the NIPA.</h3>
+		<table>
+		<tr><td>A:</td><td><span id='A'></span></td></tr>
+		<tr><td>alpha:</td><td><span id='alpha'></span></td></tr>
+		<tr><td>beta:</td><td><span id='beta'></span></td></tr>
+		<tr><td>theta:</td><td><span id='theta'></span></td></tr>
+		<tr><td>delta:</td><td><span id='delta'></span></td></tr>
+		</table>
+		<h3>The model is calibrated. We can solve for the steady state and compute the total welfare.</h3>
+		<div style='margin-top: 2em'><button id='back_1' style='float: left'>&lt; Prev</button><button style='float: right' id='next_1'>Next &gt;</button></div>
+	</div>
+	<div id='panel2'>
+		<h2>STEADY STATE</h2>
+		<table>
+			<tr><td>Consumption</td><td><span id='consumption'></span></td></tr>
+			<tr><td>Labor (h)</td><td><span id='labor'></span></td></tr>
+			<tr><td>Capital (k)</td><td><span id='capital'></span></td></tr>
+			<tr><td>Output (y)</td><td><span id='output'></span></td></tr>
+			<tr><td>Wage (w)</td><td><span id='wage'></span></td></tr>
+			<tr><td>Real Return to Capital (r)</td><td><span id='real_return_to_k'></span></td></tr>
+			<tr><td>Real Interest Rate (i)</td><td><span id='real_i_rate'></span></td></tr>
+			<tr><td>Total tax revenue is</td><td><span id='total_revenue'></span></td></tr>
+			<tr><td>Used for government expenditure</td><td><span id='used_for_g_expenditure'></span></td></tr>
+			<tr><td>Transfers</td><td><span id='used_for_transfers'></span></td></tr>
+			<tr><td>Welfare</td><td><span id='welfare'></span></td></tr>
+		</table>
+		<div style='margin-top: 2em'><button id='back_2' style='float: left'>&lt; Prev</button><button style='float: right' id='next_2'>Next &gt;</button></div>
+	</div>
+	<div id='panel3'>
+		<h2>TAX REFORM</h2>
+		<div>We will consider now the following fiscal experiment: shut down labor and capital taxation and set tax on consumption in order to keep government expenditure and transfers at the same aggregate amount predicted by the calibrated model. The rate tau_c that guarantees the revenue neutrality is found by the program: you need just to shut down tau_h and tau_k (i.e. set them to zero).</div>
+		<table>
+			<tr><td>Tax on labor (tau_h)</td><td><input type='text' id='tau_h_1' value='0.0'></td></tr>
+			<tr><td>Tax on capital (tau_k)</td><td><input type='text' id='tau_k_1' value='0.00'></td></tr>
+		</table>
+		<div style='margin-top: 2em'><button id='back_3' style='float: left'>&lt; Prev</button><button style='float: right' id='next_3'>Next &gt;</button></div>
+	</div>
+	<div id='panel4'>
+		<h2>Scenario 1</h2>
+		<div>Let's see the welfare and the steady state values in this experiment.</div>
+		<table>
+			<tr><td>Consumption</td><td><span id='consumption'></span></td></tr>
+			<tr><td>Labor (h)</td><td><span id='labor'></span></td></tr>
+			<tr><td>Capital (k)</td><td><span id='capital'></span></td></tr>
+			<tr><td>Output (y)</td><td><span id='output'></span></td></tr>
+			<tr><td>Wage (w)</td><td><span id='wage'></span></td></tr>
+			<tr><td>Real Return to Capital (r)</td><td><span id='real_return_to_k'></span></td></tr>
+			<tr><td>Real Interest Rate (i)</td><td><span id='real_i_rate'></span></td></tr>
+			<tr><td>Total tax revenue is</td><td><span id='total_revenue'></span></td></tr>
+			<tr><td>Used for government expenditure</td><td><span id='used_for_g_expenditure'></span></td></tr>
+			<tr><td>Transfers</td><td><span id='used_for_transfers'></span></td></tr>
+			<tr><td>Welfare</td><td><span id='welfare'></span></td></tr>
+		</table>
+		<div style='margin-top: 2em'><button id='back_4' style='float: left'>&lt; Prev</button><button style='float: right' id='next_4'>Next &gt;</button></div>
+	</div>
+</body>
+</html>
