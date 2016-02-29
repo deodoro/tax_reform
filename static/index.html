@@ -141,8 +141,12 @@
  		        });
 			})
 			$("#back_3").click(function() {
-	  			$("#panel3").hide()
-	  			$("#panel2").show()
+	  			$("#panel4").hide();
+	  			$("#panel3").show();
+			});
+			$("#next_4").click(function() {
+	  			$("#panel4").hide();
+	  			$("#panel3").show();
 			});
 		})
 	</script>
@@ -150,7 +154,7 @@
 <body>
 	<H1>TAX REFORM<br/>(NEOCLASSICAL GROWTH MODEL WITH FISCAL POLICY)</H1>
 	<div id='panel0'>
-		<div>We want to study the effects of changing the US taxation policy (great reliance on labor and capital taxes, and small use of consumption taxes) in a system that taxes mostly consumption. In order to do that we use a Neoclassical Growth Model with a government sector. We need first to calibrate our model to the US economy and find steady state values of tax revenues and welfare. Then, we will implement a revenue-neutral tax reform and see how it affects welfare and aggregate variables in the steady state.raw_input("Press Enter to start.")</div>
+		<div>We want to study the effects of changing the US taxation policy (great reliance on labor and capital taxes, and small use of consumption taxes) in a system that taxes mostly consumption. In order to do that we use a Neoclassical Growth Model with a government sector. We need first to calibrate our model to the US economy and find steady state values of tax revenues and welfare. Then, we will implement a revenue-neutral tax reform and see how it affects welfare and aggregate variables in the steady state.</div>
 		<h2>CALIBRATION</h2>
 		<h3>Input the relevant aggregate ratios that are obtained by reorganizing the NIPA. Use decimal notation (not fractions).</h3>
 		<table>
@@ -197,8 +201,8 @@
 		<div style='margin-top: 2em'><button id='back_2' style='float: left'>&lt; Prev</button><button style='float: right' id='next_2'>Next &gt;</button></div>
 	</div>
 	<div id='panel3'>
-		<h2>TAX REFORM</h2>
-		<div>We will consider now the following fiscal experiment: shut down labor and capital taxation and set tax on consumption in order to keep government expenditure and transfers at the same aggregate amount predicted by the calibrated model. The rate tau_c that guarantees the revenue neutrality is found by the program: you need just to shut down tau_h and tau_k (i.e. set them to zero).</div>
+		<h2>TAX REFORM EXPERIMENTS</h2>
+		<div>Let's try now fiscal experiments. You can change labor and capital taxation, while tax on consumption is automatically set in order to keep government expenditure and transfers at the same aggregate amount predicted by the calibrated model. </div>
 		<table>
 			<tr><td>Tax on labor (tau_h)</td><td><input type='text' id='tau_h_1' value='0.0'></td></tr>
 			<tr><td>Tax on capital (tau_k)</td><td><input type='text' id='tau_k_1' value='0.00'></td></tr>
@@ -206,7 +210,7 @@
 		<div style='margin-top: 2em'><button id='back_3' style='float: left'>&lt; Prev</button><button style='float: right' id='next_3'>Next &gt;</button></div>
 	</div>
 	<div id='panel4'>
-		<h2>Scenario 1</h2>
+		<h2>Result of Tax Reform</h2>
 		<div>Let's see the welfare and the steady state values in this experiment.</div>
 		<table>
 			<tr><td>Consumption</td><td><span id='consumption'></span></td></tr>
@@ -221,7 +225,7 @@
 			<tr><td>Transfers</td><td><span id='used_for_transfers'></span></td></tr>
 			<tr><td>Welfare</td><td><span id='welfare'></span></td></tr>
 		</table>
-		<div style='margin-top: 2em'><button id='back_4' style='float: left'>&lt; Prev</button><button style='float: right' id='next_4'>Next &gt;</button></div>
+		<div style='margin-top: 2em'><button id='back_4' style='float: left'>&lt; Prev</button><button style='float: right' id='next_4'>Other Experiment &gt;</button></div>
 	</div>
 </body>
 </html>
