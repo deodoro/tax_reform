@@ -44,8 +44,8 @@
 			var benchmark = { total_revenue: 0 };
 			var makeParams = function(taxes) {
 				var result = {"tauc":  eval($("#tau_c").val()), "H": eval($("#h").val()), "g":  eval($("#g_y").val()), "GtoY":  eval($("#g_y").val()), "tauk": eval($("#tau_k").val()), "tauh":  eval($("#tau_h").val()), "XtoY":  eval($("#x_y").val()), "KtoY": eval($("#k_y").val()), "rKtoY": eval($("#rk_y").val()), "benchmark_result" : benchmark.total_revenue };
-				if (taxes !== undefined)
-					$.each(taxes, function(t) { result[t] = $(t).val(); });
+				if (taxes !== undefined) 
+					$.each(taxes, function(k,v) { result[k] = eval($(v).val()); });
 				return result;
 			};
 			$("#next_0").click(function() {
@@ -120,7 +120,7 @@
 				  type: "POST",
 				  url: '/run',
 	 			  contentType:"application/json; charset=utf-8",
-				  data: JSON.stringify(makeParams({'tau_h_1': 'tau_h', 'tau_k_1': 'tau_k'})),
+				  data: JSON.stringify(makeParams({'tauh': '#tau_h_1', 'tauk': '#tau_k_1'})),
 				  dataType: 'json',
 				  success: function(d) {
 				  			$("#panel3").hide()
