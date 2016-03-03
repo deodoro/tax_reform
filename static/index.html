@@ -3,6 +3,7 @@
 <head>
 	<title>Tax Reform</title>
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900,700italic,900italic,500italic,400italic,300italic,100,100italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<style type="text/css">
 		html {
 			font-family: Roboto;			
@@ -10,17 +11,18 @@
 		body {
 			margin: 1.5em;
 		}
-		h1,h2,h3 {
-			margin-bottom: .5em
+		h2,h3 {
+			margin-bottom: 1em
 		}
 		button {
 			padding-right: 1em;
 			padding-left: 1em;
 			font-weight: 100;
 			font-size: 2em;
-			background-color: #f0f0f0;
+			background-color: #ffffff;
 			border: 1px solid #000000;
 			border-radius: 0.1em;
+			margin: 0.5em 1em;
 		}
 		table {
 			width: 80%;
@@ -35,6 +37,20 @@
 		}
 		#panel1, #panel2, #panel3, #panel4 {
 			display: none;
+		}
+		div.explanation {
+			margin-top: -1em;
+			font-size: 0.9em;
+			color: #999999;
+			font-weight: 300;
+		}
+		div.button-bar {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			left: 0;
+			width: 100%;
+			background-color: #f0f0f0;
 		}
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -63,7 +79,10 @@
 				  			$("span#beta").text(d.beta);
 				  			$("span#theta").text(d.theta);
 				  			$("span#delta").text(d.delta);
-					   }
+					   },
+				  error: function() {
+				  	alert('Error in calculations. Please check your parameters.')
+				  }
  		        });
 			// <tr><td>Consumption</td><td><span id='consumption'></span></td></tr>
 			// <tr><td>Labor (h)</td><td><span id='labor'></span></td></tr>
@@ -100,7 +119,10 @@
 				  			$("span#used_for_g_expenditure").text(d.used_for_g_expenditure);
 				  			$("span#used_for_transfers").text(d.used_for_transfers);
 				  			$("span#welfare").text(d.welfare);
-					   }
+					   },
+				  error: function() {
+				  	alert('Error in calculations. Please check your parameters.')
+				  }
  		        });
 			})
 			$("#back_1").click(function() {
@@ -137,12 +159,18 @@
 				  			$("span#used_for_g_expenditure").text(d.used_for_g_expenditure);
 				  			$("span#used_for_transfers").text(d.used_for_transfers);
 				  			$("span#welfare").text(d.welfare);
-					   }
+					   },
+				  error: function() {
+				  	alert('Error in calculations. Please check your parameters.')
+				  }
  		        });
 			})
 			$("#back_3").click(function() {
-	  			$("#panel4").hide();
-	  			$("#panel3").show();
+	  			$("#panel3").hide();
+	  			$("#panel2").show();
+			});
+			$("#back_4").click(function() {
+				location.reload(true);
 			});
 			$("#next_4").click(function() {
 	  			$("#panel4").hide();
@@ -153,12 +181,12 @@
 </head>
 <body>
 	<H1>TAX REFORM<br/>(NEOCLASSICAL GROWTH MODEL WITH FISCAL POLICY)</H1>
+	<div class='explanation'>We want to study the effects of changing the US taxation policy (great reliance on labor and capital taxes, and small use of consumption taxes) in a system that taxes mostly consumption. In order to do that we use a Neoclassical Growth Model with a government sector. We need first to calibrate our model to the US economy and find steady state values of tax revenues and welfare. Then, we will implement a revenue-neutral tax reform and see how it affects welfare and aggregate variables in the steady state.</div>
 	<div id='panel0'>
-		<div>We want to study the effects of changing the US taxation policy (great reliance on labor and capital taxes, and small use of consumption taxes) in a system that taxes mostly consumption. In order to do that we use a Neoclassical Growth Model with a government sector. We need first to calibrate our model to the US economy and find steady state values of tax revenues and welfare. Then, we will implement a revenue-neutral tax reform and see how it affects welfare and aggregate variables in the steady state.</div>
 		<h2>CALIBRATION</h2>
 		<h3>Input the relevant aggregate ratios that are obtained by reorganizing the NIPA. Use decimal notation (not fractions).</h3>
 		<table>
-			<tr><td>Investment to output ratio (X/Y)</td><td><input type='text' id='x_y' value='0.2'></td></tr>
+<!-- 			<tr><td>Investment to output ratio (X/Y)</td><td><input type='text' id='x_y' value='0.2'></td></tr>
 			<tr><td>Government expenditure to output ratio (G/Y)</td><td><input type='text' id='g_y' value='0.05'></td></tr>
 			<tr><td>Capital to output ratio (K/Y)</td><td><input type='text' id='k_y' value='2.9'></td></tr>
 			<tr><td>Capital income share (rK/Y)</td><td><input type='text' id='rk_y' value='0.333'></td></tr>
@@ -167,8 +195,17 @@
 			<tr><td>Tax on labor (tau_h)</td><td><input type='text' id='tau_h' value='0.31'></td></tr>
 			<tr><td>Tax on capital (tau_k)</td><td><input type='text' id='tau_k' value='0.29'></td></tr>
 			<tr><td>Tax on consumption (tau_c)</td><td><input type='text' id='tau_c' value='0.07'></td></tr>
+ -->			<tr><td>Investment to output ratio (X/Y)</td><td><input type='text' id='x_y' value='0.0'></td></tr>
+			<tr><td>Government expenditure to output ratio (G/Y)</td><td><input type='text' id='g_y' value='0.0'></td></tr>
+			<tr><td>Capital to output ratio (K/Y)</td><td><input type='text' id='k_y' value='0.0'></td></tr>
+			<tr><td>Capital income share (rK/Y)</td><td><input type='text' id='rk_y' value='0.0'></td></tr>
+			<tr><td>Average hours worked per week (h*100)</td><td><input type='text' id='h' value='0.0'></td></tr>
+			<tr><td colspan="2" style='text-align: left'><h3>Now insert the tax rates calibrated to the US accounts</h3></td></tr>
+			<tr><td>Tax on labor (tau_h)</td><td><input type='text' id='tau_h' value='0.0'></td></tr>
+			<tr><td>Tax on capital (tau_k)</td><td><input type='text' id='tau_k' value='0.0'></td></tr>
+			<tr><td>Tax on consumption (tau_c)</td><td><input type='text' id='tau_c' value='0.0'></td></tr>
 		</table>
-		<div style='margin-top: 2em'><button style='float: right' id='next_0'>Next &gt;</button></div>
+		<div style='margin-top: 2em' class='button-bar'><button style='float: right' id='next_0'>Next &gt;</button></div>
 	</div>
 	<div id='panel1'>
 		<h2>CALIBRATED PARAMETERS</h2>
@@ -181,7 +218,7 @@
 		<tr><td>delta:</td><td><span id='delta'></span></td></tr>
 		</table>
 		<h3>The model is calibrated. We can solve for the steady state and compute the total welfare.</h3>
-		<div style='margin-top: 2em'><button id='back_1' style='float: left'>&lt; Prev</button><button style='float: right' id='next_1'>Next &gt;</button></div>
+		<div style='margin-top: 2em' class='button-bar'><button id='back_1' style='float: left'>&lt; Prev</button><button style='float: right' id='next_1'>Next &gt;</button></div>
 	</div>
 	<div id='panel2'>
 		<h2>STEADY STATE</h2>
@@ -198,20 +235,20 @@
 			<tr><td>Transfers</td><td><span id='used_for_transfers'></span></td></tr>
 			<tr><td>Welfare</td><td><span id='welfare'></span></td></tr>
 		</table>
-		<div style='margin-top: 2em'><button id='back_2' style='float: left'>&lt; Prev</button><button style='float: right' id='next_2'>Next &gt;</button></div>
+		<div style='margin-top: 2em' class='button-bar'><button id='back_2' style='float: left'>&lt; Prev</button><button style='float: right' id='next_2'>Next &gt;</button></div>
 	</div>
 	<div id='panel3'>
 		<h2>TAX REFORM EXPERIMENTS</h2>
-		<div>Let's try now fiscal experiments. You can change labor and capital taxation, while tax on consumption is automatically set in order to keep government expenditure and transfers at the same aggregate amount predicted by the calibrated model. </div>
+		<h3 class='subtitle'>Let's try now fiscal experiments. You can change labor and capital taxation, while tax on consumption is automatically set in order to keep government expenditure and transfers at the same aggregate amount predicted by the calibrated model. </h3>
 		<table>
 			<tr><td>Tax on labor (tau_h)</td><td><input type='text' id='tau_h_1' value='0.0'></td></tr>
 			<tr><td>Tax on capital (tau_k)</td><td><input type='text' id='tau_k_1' value='0.00'></td></tr>
 		</table>
-		<div style='margin-top: 2em'><button id='back_3' style='float: left'>&lt; Prev</button><button style='float: right' id='next_3'>Next &gt;</button></div>
+		<div style='margin-top: 2em' class='button-bar'><button id='back_3' style='float: left'>&lt; Prev</button><button style='float: right' id='next_3'>Next &gt;</button></div>
 	</div>
 	<div id='panel4'>
-		<h2>Result of Tax Reform</h2>
-		<div>Let's see the welfare and the steady state values in this experiment.</div>
+		<h2>RESULT OF TAX REFORM</h2>
+		<h3>Let's see the welfare and the steady state values in this experiment.</h3>
 		<table>
 			<tr><td>Consumption</td><td><span id='consumption'></span></td></tr>
 			<tr><td>Labor (h)</td><td><span id='labor'></span></td></tr>
@@ -225,7 +262,7 @@
 			<tr><td>Transfers</td><td><span id='used_for_transfers'></span></td></tr>
 			<tr><td>Welfare</td><td><span id='welfare'></span></td></tr>
 		</table>
-		<div style='margin-top: 2em'><button id='back_4' style='float: left'>&lt; Prev</button><button style='float: right' id='next_4'>Other Experiment &gt;</button></div>
+		<div style='margin-top: 2em' class='button-bar'><button id='back_4' style='float: left'><span class='fa fa-rotate-left'></span>&nbsp;Start Over</button><button style='float: right' id='next_4'>Other Experiment &gt;</button></div>
 	</div>
 </body>
 </html>
