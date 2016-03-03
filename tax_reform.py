@@ -182,6 +182,11 @@ class Benchmark(tornado.web.RequestHandler):
         params = calculate_params(json.loads(self.request.body))
         self.write(bench_economy(params))
 
+class MainHandler(tornado.web.RequestHandler):
+    def get(self):
+        print 'test'
+        self.render('static/index.html')
+
 if __name__ == "__main__":
     settings = {
         "debug": True,
@@ -190,6 +195,8 @@ if __name__ == "__main__":
 
     application = tornado.web.Application([(r'/bench', Benchmark),
                                            (r'/run', ARun),
-                                           (r'/calibrate', Calibrate)], **settings)
+                                           (r'/calibrate', Calibrate),
+                                           (r'/', MainHandler)],
+                                           **settings)
     application.listen(8080)
     tornado.ioloop.IOLoop.instance().start()
