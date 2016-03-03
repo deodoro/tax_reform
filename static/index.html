@@ -159,6 +159,7 @@
 				  			$("span#used_for_g_expenditure").text(d.used_for_g_expenditure);
 				  			$("span#used_for_transfers").text(d.used_for_transfers);
 				  			$("span#welfare").text(d.welfare);
+				  			$("span#tauc").text(d.tauc);
 					   },
 				  error: function() {
 				  	alert('Error in calculations. Please check your parameters.')
@@ -195,7 +196,8 @@
 			<tr><td>Tax on labor (tau_h)</td><td><input type='text' id='tau_h' value='0.31'></td></tr>
 			<tr><td>Tax on capital (tau_k)</td><td><input type='text' id='tau_k' value='0.29'></td></tr>
 			<tr><td>Tax on consumption (tau_c)</td><td><input type='text' id='tau_c' value='0.07'></td></tr>
- -->			<tr><td>Investment to output ratio (X/Y)</td><td><input type='text' id='x_y' value='0.0'></td></tr>
+ -->
+			<tr><td>Investment to output ratio (X/Y)</td><td><input type='text' id='x_y' value='0.0'></td></tr>
 			<tr><td>Government expenditure to output ratio (G/Y)</td><td><input type='text' id='g_y' value='0.0'></td></tr>
 			<tr><td>Capital to output ratio (K/Y)</td><td><input type='text' id='k_y' value='0.0'></td></tr>
 			<tr><td>Capital income share (rK/Y)</td><td><input type='text' id='rk_y' value='0.0'></td></tr>
@@ -204,7 +206,8 @@
 			<tr><td>Tax on labor (tau_h)</td><td><input type='text' id='tau_h' value='0.0'></td></tr>
 			<tr><td>Tax on capital (tau_k)</td><td><input type='text' id='tau_k' value='0.0'></td></tr>
 			<tr><td>Tax on consumption (tau_c)</td><td><input type='text' id='tau_c' value='0.0'></td></tr>
-		</table>
+
+ 		</table>
 		<div style='margin-top: 2em' class='button-bar'><button style='float: right' id='next_0'>Next &gt;</button></div>
 	</div>
 	<div id='panel1'>
@@ -261,6 +264,7 @@
 			<tr><td>Used for government expenditure</td><td><span id='used_for_g_expenditure'></span></td></tr>
 			<tr><td>Transfers</td><td><span id='used_for_transfers'></span></td></tr>
 			<tr><td>Welfare</td><td><span id='welfare'></span></td></tr>
+			<tr><td>Tax rate on consumption (endogenous)</td><td><span id='tauc'></span></td></tr>
 		</table>
 		<div style='margin-top: 2em' class='button-bar'><button id='back_4' style='float: left'><span class='fa fa-rotate-left'></span>&nbsp;Start Over</button><button style='float: right' id='next_4'>Other Experiment &gt;</button></div>
 	</div>
