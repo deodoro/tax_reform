@@ -115,7 +115,7 @@ def bench_economy(params):
                'used_for_g_expenditure': round(BenchTaxRev[1],3),
                'used_for_transfers': round(BenchTaxRev[2],3),
                'welfare': round(BenchEconomy.welfare(),3),
-               'tauc': round(params['tauc'],3) }
+               'tauc': round(params['tauc'],3) }, BenchTaxRev 
 
 def a_run(params):
     # Find the tax on consumption that holds revenue neutrality
