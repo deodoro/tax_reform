@@ -105,7 +105,7 @@ def bench_economy(params):
 
     BenchTaxRev=BenchEconomy.TaxRev()
     return {'consumption': round(BenchEconomy.ss()[0],3),
-               'labor': round(BenchEconomy.ss()[1]),
+               'labor': round(BenchEconomy.ss()[1],3),
                'capital': round(BenchEconomy.ss()[2],3),
                'output': round(BenchEconomy.prod.total(BenchEconomy.ss()[2],BenchEconomy.ss()[1]),3),
                'wage': round(BenchEconomy.ss()[3],3),
@@ -122,8 +122,8 @@ def a_run(params):
     def objFun(tauc):
 #        econ=GrowthModel(alpha,beta,A, theta, delta, tauh, tauc, tauk,G=BenchTaxRev[1])
 #        econ=GrowthModel(alpha,beta,A, theta, delta, tauh, tauc, tauk,G=g)
-        econ=GrowthModel(params['alpha'], params['beta'], params['A'], params['theta'], params['delta'], params['tauh'], tauc, params['tauk'], G=params['g'])
-        return econ.TaxRev()[2]-params['benchmark_result']
+        econ=GrowthModel(params['alpha'], params['beta'], params['A'], params['theta'], params['delta'], params['tauh'], tauc, params['tauk'], G=BenchTaxRev[1])
+        return econ.TaxRev()[2]-BenchTaxRev[2]
         
     tauc=newton(objFun,0.5)
 
@@ -132,7 +132,7 @@ def a_run(params):
     ReformTaxRev=ReformEconomy.TaxRev()
 
     return {'consumption': round(ReformEconomy.ss()[0],3),
-               'labor': round(ReformEconomy.ss()[1]),
+               'labor': round(ReformEconomy.ss()[1],3),
                'capital': round(ReformEconomy.ss()[2],3),
                'output': round(ReformEconomy.prod.total(ReformEconomy.ss()[2],ReformEconomy.ss()[1]),3),
                'wage': round(ReformEconomy.ss()[3],3),
@@ -156,6 +156,7 @@ def calculate_params(params):
     h=float(params['H']/100)
     params['alpha']=((1-h)/h)*(1-params['rKtoY'])*((1-params['tauh'])/(1+params['tauc']))*(1-params['XtoY']-params['GtoY'])**(-1)
     params['A']=1    
+    params['g']=params['GtoY']
     return params
 
 #Calibrate
