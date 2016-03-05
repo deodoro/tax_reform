@@ -105,7 +105,7 @@ def bench_economy(params):
 
     BenchTaxRev=BenchEconomy.TaxRev()
     return {'consumption': round(BenchEconomy.ss()[0],3),
-               'labor': round(BenchEconomy.ss()[1]),
+               'labor': round(BenchEconomy.ss()[1],3),
                'capital': round(BenchEconomy.ss()[2],3),
                'output': round(BenchEconomy.prod.total(BenchEconomy.ss()[2],BenchEconomy.ss()[1]),3),
                'wage': round(BenchEconomy.ss()[3],3),
@@ -132,7 +132,7 @@ def a_run(params):
     ReformTaxRev=ReformEconomy.TaxRev()
 
     return {'consumption': round(ReformEconomy.ss()[0],3),
-               'labor': round(ReformEconomy.ss()[1]),
+               'labor': round(ReformEconomy.ss()[1],3),
                'capital': round(ReformEconomy.ss()[2],3),
                'output': round(ReformEconomy.prod.total(ReformEconomy.ss()[2],ReformEconomy.ss()[1]),3),
                'wage': round(ReformEconomy.ss()[3],3),
