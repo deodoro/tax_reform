@@ -117,13 +117,13 @@ def bench_economy(params):
                'welfare': round(BenchEconomy.welfare(),3),
                'tauc': round(params['tauc'],3) }
 
-def a_run(params):
+def a_run(params,G1,G2):
     # Find the tax on consumption that holds revenue neutrality
     def objFun(tauc):
 #        econ=GrowthModel(alpha,beta,A, theta, delta, tauh, tauc, tauk,G=BenchTaxRev[1])
 #        econ=GrowthModel(alpha,beta,A, theta, delta, tauh, tauc, tauk,G=g)
-        econ=GrowthModel(params['alpha'], params['beta'], params['A'], params['theta'], params['delta'], params['tauh'], tauc, params['tauk'], G=params['g'])
-        return econ.TaxRev()[2]-params['benchmark_result']
+        econ=GrowthModel(params['alpha'], params['beta'], params['A'], params['theta'], params['delta'], params['tauh'], tauc, params['tauk'], G=G1)
+        return econ.TaxRev()[2]-G2
         
     tauc=newton(objFun,0.5)
 
@@ -172,7 +172,8 @@ class ARun(tornado.web.RequestHandler):
         print self.request.body
         self.set_header("Content-Type", "application/json")
         params = calculate_params(json.loads(self.request.body))
-        self.write(a_run(params))
+        bench = bench_economy(params)
+        self.write(a_run(params,bench['used_for_g_expenditure'],bench['used_for_transfers']))
 
 # TEST
 class Benchmark(tornado.web.RequestHandler):
