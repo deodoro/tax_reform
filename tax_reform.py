@@ -139,8 +139,8 @@ def a_run(params,G1,G2):
                'real_return_to_k': round(ReformEconomy.ss()[4],3),
                'real_i_rate': round(ReformEconomy.ss()[5],3),
                'total_revenue': round(ReformTaxRev[0],3),
-               'used_for_g_expenditure': round(ReformTaxRev[1],3),
-               'used_for_transfers': round(ReformTaxRev[2],3),
+               'used_for_g_expenditure': ReformTaxRev[1],
+               'used_for_transfers': ReformTaxRev[2],
                'welfare': round(ReformEconomy.welfare(),3),
                'tauc': round(tauc,3) }
 
